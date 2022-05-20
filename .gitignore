@@ -20,3 +20,7 @@
 ###< phpunit/phpunit ###
 
 /composer.phar
+
+/migrations
+
+data.db
