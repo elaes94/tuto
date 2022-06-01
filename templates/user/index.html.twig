@@ -3,30 +3,30 @@
 {% block title %}User index{% endblock %}
 
 {% block body %}
-    <h1>User index</h1>
+    <h1 class="mb-2">User index</h1>
 
-    <table class="table">
+    <table class="mb-2 border-collapse border border-slate-400">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Email</th>
-                <th>Roles</th>
-                <th>Password</th>
-                <th>IsVerified</th>
-                <th>actions</th>
+                <th class="p-2 border border-slate-300">Id</th>
+                <th class="p-2 border border-slate-300">Email</th>
+                <th class="p-2 border border-slate-300">Roles</th>
+                <th class="p-2 border border-slate-300">Password</th>
+                <th class="p-2 border border-slate-300">IsVerified</th>
+                <th class="p-2 border border-slate-300">actions</th>
             </tr>
         </thead>
         <tbody>
         {% for user in users %}
             <tr>
-                <td>{{ user.id }}</td>
-                <td>{{ user.email }}</td>
-                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-                <td>{{ user.password }}</td>
-                <td>{{ user.isVerified ? 'Yes' : 'No' }}</td>
-                <td>
-                    <a href="{{ path('app_user_show', {'id': user.id}) }}">show</a>
-                    <a href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
+                <td class="p-2 border border-slate-300">{{ user.id }}</td>
+                <td class="p-2 border border-slate-300">{{ user.email }}</td>
+                <td class="p-2 border border-slate-300">{{ user.roles ? user.roles|json_encode : '' }}</td>
+                <td class="p-2 border border-slate-300">{{ user.password }}</td>
+                <td class="p-2 border border-slate-300">{{ user.isVerified ? 'Yes' : 'No' }}</td>
+                <td class="p-2 border border-slate-300">
+                    <a class="p-1 bg-sky-500 rounded-lg" href="{{ path('app_user_show', {'id': user.id}) }}">show</a>
+                    <a class="p-1 bg-sky-500 rounded-lg" href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -37,5 +37,7 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_user_new') }}">Create new</a>
+    <div class="mb-2">
+        <a class="p-1 bg-sky-500 rounded-lg" href="{{ path('app_user_new') }}">Create new</a>
+    </div>
 {% endblock %}
