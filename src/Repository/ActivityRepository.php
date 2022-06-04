@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Activity;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -37,6 +38,23 @@ class ActivityRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    public function getPage($page)
+    {
+        $query = $this->createQueryBuilder('a')
+                    ->getQuery();
+
+        $pageSize = 1;
+        $paginator = new Paginator($query);
+        $totalItems = count($paginator);
+        $pagesCount = ceil($totalItems / $pageSize);
+        $paginator
+        ->getQuery()
+        ->setFirstResult($pageSize * ($page-1)) // set the offset
+        ->setMaxResults($pageSize);
+
+        return [$paginator, $pagesCount];
     }
 
 //    /**
