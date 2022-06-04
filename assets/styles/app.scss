@@ -5,3 +5,9 @@
 // body {
 //     background-color: lightgray;
 // }
+
+@layer components{
+     .btn{
+         @apply p-1 bg-sky-500 rounded-lg
+     }
+}
