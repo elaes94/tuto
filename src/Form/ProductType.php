@@ -2,7 +2,9 @@
 
 namespace App\Form;
 
+use App\Entity\Activity;
 use App\Entity\Product;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -13,7 +15,10 @@ class ProductType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('activity')
+            ->add('activity', EntityType::class, [
+                'class' => Activity::class,
+                'choice_label' => 'name',
+            ])
         ;
     }
 

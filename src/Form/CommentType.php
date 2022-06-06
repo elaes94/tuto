@@ -2,7 +2,9 @@
 
 namespace App\Form;
 
+use App\Entity\Activity;
 use App\Entity\Comment;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -14,7 +16,10 @@ class CommentType extends AbstractType
         $builder
             ->add('content')
             ->add('date')
-            ->add('activity')
+            ->add('activity', EntityType::class, [
+                'class' => Activity::class,
+                'choice_label' => 'name',
+            ])
         ;
     }
 
