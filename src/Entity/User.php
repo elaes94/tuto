@@ -34,6 +34,21 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Activity::class, mappedBy: 'contact')]
     private $activities;
 
+    #[ORM\Column(type: 'string', length: 255)]
+    private $firstname;
+
+    #[ORM\Column(type: 'string', length: 255)]
+    private $lastname;
+
+    #[ORM\Column(type: 'integer')]
+    private $phone_1;
+
+    #[ORM\Column(type: 'integer', nullable: true)]
+    private $phone_2;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $social;
+
     public function __construct()
     {
         $this->activities = new ArrayCollection();
@@ -147,4 +162,64 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     //     return $this;
     // }
+
+    public function getFirstname(): ?string
+    {
+        return $this->firstname;
+    }
+
+    public function setFirstname(string $firstname): self
+    {
+        $this->firstname = $firstname;
+
+        return $this;
+    }
+
+    public function getLastname(): ?string
+    {
+        return $this->lastname;
+    }
+
+    public function setLastname(string $lastname): self
+    {
+        $this->lastname = $lastname;
+
+        return $this;
+    }
+
+    public function getPhone1(): ?int
+    {
+        return $this->phone_1;
+    }
+
+    public function setPhone1(int $phone_1): self
+    {
+        $this->phone_1 = $phone_1;
+
+        return $this;
+    }
+
+    public function getPhone2(): ?int
+    {
+        return $this->phone_2;
+    }
+
+    public function setPhone2(?int $phone_2): self
+    {
+        $this->phone_2 = $phone_2;
+
+        return $this;
+    }
+
+    public function getSocial(): ?string
+    {
+        return $this->social;
+    }
+
+    public function setSocial(?string $social): self
+    {
+        $this->social = $social;
+
+        return $this;
+    }
 }
