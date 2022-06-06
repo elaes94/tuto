@@ -21,12 +21,12 @@ class Activity
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $description;
 
-    #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'activities')]
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'activities')]
     private $contact;
 
     public function __construct()
     {
-        $this->contact = new ArrayCollection();
+        $this->contact = new User();
     }
 
     public function getId(): ?int
@@ -58,27 +58,13 @@ class Activity
         return $this;
     }
 
-    /**
-     * @return Collection<int, User>
-     */
-    public function getContact(): Collection
+    public function getContact(): ?User
     {
         return $this->contact;
     }
 
-    public function addContact(User $contact): self
-    {
-        if (!$this->contact->contains($contact)) {
-            $this->contact[] = $contact;
-        }
-
-        return $this;
-    }
-
-    public function removeContact(User $contact): self
-    {
-        $this->contact->removeElement($contact);
-
+    public function setContact(?User $contact): self{
+        $this->contact = $contact;
         return $this;
     }
 }

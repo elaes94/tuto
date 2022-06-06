@@ -3,6 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Activity;
+use App\Entity\User;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -14,7 +16,10 @@ class ActivityType extends AbstractType
         $builder
             ->add('name')
             ->add('description')
-            // ->add('contact')
+            ->add('contact', EntityType::class, [
+                'class' => User::class,
+                'choice_label' => 'email',
+            ])
         ;
     }
 

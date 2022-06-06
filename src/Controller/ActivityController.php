@@ -17,21 +17,24 @@ class ActivityController extends AbstractController
     public function index(Request $request, ActivityRepository $activityRepository): Response
     {
         $page = $request->query->get('page', 1);
-        var_dump("page = " . $page);
         return $this->render('activity/index.html.twig', [
-            // 'activities' => $activityRepository->findAll(),
             'activities' => $activityRepository->getPage($page)[0],
             'totalPage' => $activityRepository->getPage($page)[1],
             'currentPage' => $page,
         ]);
     }
 
-    #[Route('/search/{searchString}', name: 'app_activity_search', methods: ['GET'])]
-    public function search(ActivityRepository $activityRepository, string $searchString = ""): Response
+    #[Route('/search', name: 'app_activity_search', methods: ['GET'])]
+    public function search(Request $request, ActivityRepository $activityRepository): Response
     {
+        $searchString = $request->query->get('search', "");
         var_dump($searchString);
+        $page = $request->query->get('page', 1);
         return $this->render('activity/index.html.twig', [
-            'activities' => $activityRepository->findAll(),
+            'activities' => $activityRepository->getPage($page)[0],
+            'totalPage' => $activityRepository->getPage($page)[1],
+            'currentPage' => $page,
+            'searchString' => $searchString,
         ]);
     }
 

@@ -31,7 +31,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'boolean')]
     private $isVerified = false;
 
-    #[ORM\ManyToMany(targetEntity: Activity::class, mappedBy: 'contact')]
+    #[ORM\OneToMany(targetEntity: Activity::class, mappedBy: 'contact')]
     private $activities;
 
     public function __construct()
@@ -129,22 +129,22 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->activities;
     }
 
-    public function addActivity(Activity $activity): self
-    {
-        if (!$this->activities->contains($activity)) {
-            $this->activities[] = $activity;
-            $activity->addContact($this);
-        }
+    // public function addActivity(Activity $activity): self
+    // {
+    //     if (!$this->activities->contains($activity)) {
+    //         $this->activities[] = $activity;
+    //         $activity->addContact($this);
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function removeActivity(Activity $activity): self
-    {
-        if ($this->activities->removeElement($activity)) {
-            $activity->removeContact($this);
-        }
+    // public function removeActivity(Activity $activity): self
+    // {
+    //     if ($this->activities->removeElement($activity)) {
+    //         $activity->removeContact($this);
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 }
