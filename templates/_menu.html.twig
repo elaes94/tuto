@@ -1,17 +1,52 @@
-<nav class="flex justify-center space-x-4">
-    <a href="/" class="font-medium px-3 py-2 text-slate-700 rounded-lg hover:bg-slate-100 hover:text-slate-900">Home</a>
-    <a href="/test"
-        class="font-medium px-3 py-2 text-slate-700 rounded-lg hover:bg-slate-100 hover:text-slate-900">Test</a>
-    <a href="/user"
-        class="font-medium px-3 py-2 text-slate-700 rounded-lg hover:bg-slate-100 hover:text-slate-900">User</a>
-    <a href="/activity"
-        class="font-medium px-3 py-2 text-slate-700 rounded-lg hover:bg-slate-100 hover:text-slate-900">Activity</a>
-    <a href="/comment"
-        class="font-medium px-3 py-2 text-slate-700 rounded-lg hover:bg-slate-100 hover:text-slate-900">Comment</a>
-    <a href="/region"
-        class="font-medium px-3 py-2 text-slate-700 rounded-lg hover:bg-slate-100 hover:text-slate-900">Region</a>
-    <a href="/prestation"
-        class="font-medium px-3 py-2 text-slate-700 rounded-lg hover:bg-slate-100 hover:text-slate-900">Prestation</a>
-    <a href="/product"
-        class="font-medium px-3 py-2 text-slate-700 rounded-lg hover:bg-slate-100 hover:text-slate-900">Product</a>
-</nav>
+<!-- Navbar -->
+<nav class="relative container mx-auto p-6">
+    <!-- Flex container -->
+    <div class="flex items-center justify-between">
+      <!-- Logo -->
+      <div class="pt-2">
+        <img src="" alt="Malink" />
+      </div>
+      <!-- Menu Items -->
+      <div class="hidden space-x-6 md:flex">
+        <a href="/test" class="hover:text-blue-400">Test</a>
+        <a href="/user" class="hover:text-blue-400">User</a>
+        <a href="/activity" class="hover:text-blue-400">Activity</a>
+        <a href="/comment" class="hover:text-blue-400">Comment</a>
+        <a href="/region" class="hover:text-blue-400">Region</a>
+        <a href="/prestation" class="hover:text-blue-400">Prestation</a>
+        <a href="/product" class="hover:text-blue-400">Product</a>
+      </div>
+      <!-- Button -->
+      <a
+        href="#"
+        class="hidden p-3 px-6 pt-2 text-white bg-red-500 rounded-full baseline hover:bg-blue-400 md:block"
+        >Get Started</a
+      >
+
+      <!-- Hamburger Icon -->
+      <button
+        id="menu-btn"
+        class="block hamburger md:hidden focus:outline-none"
+      >
+        <span class="hamburger-top"></span>
+        <span class="hamburger-middle"></span>
+        <span class="hamburger-bottom"></span>
+      </button>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div class="md:hidden">
+      <div
+        id="menu"
+        class="absolute flex-col items-center hidden self-end py-8 mt-10 space-y-6 font-bold bg-white sm:w-auto sm:self-center left-6 right-6 drop-shadow-md"
+      >
+        <a href="/test">Test</a>
+        <a href="/user">User</a>
+        <a href="/activity">Activity</a>
+        <a href="/comment">Comment</a>
+        <a href="/region">Region</a>
+        <a href="/prestation">Prestation</a>
+        <a href="/product">Product</a>
+      </div>
+    </div>
+  </nav>
