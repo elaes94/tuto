@@ -19,13 +19,13 @@
       <a href="/product" class="hover:text-blue-400">Product</a>
     </div>
     <!-- Button -->
-    <div>
-      {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-      <p>Email: {{ app.user.email }}</p>
-      {% endif %}
-      <a href="#"
-        class="hidden p-3 px-6 pt-2 text-white bg-red-500 rounded-full baseline hover:bg-blue-400 md:block">Get
-        Started</a>
+    <div class="hidden md:flex space-x-6">
+      <a href="#" class="hidden p-3 px-6 pt-2 text-white bg-red-500 rounded-full baseline hover:bg-blue-400 md:block">
+        Profil
+      </a>
+      <a href="/logout" class="hidden p-3 px-6 pt-2 text-white bg-red-500 rounded-full baseline hover:bg-blue-400 md:block">
+        Logout
+      </a>
     </div>
 
     <!-- Hamburger Icon -->
