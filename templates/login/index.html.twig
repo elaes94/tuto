@@ -2,24 +2,35 @@
 {% extends 'base.html.twig' %}
 
 {# ... #}
+{% block title %}Connexion{% endblock %}
 
 {% block body %}
-    {% if error %}
-        <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
+{% if error %}
+<div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+{% endif %}
 
-    <form action="{{ path('login') }}" method="post">
-        <label for="username">Email:</label>
-        <input type="text" id="username" name="_username" value="{{ last_username }}"/>
+<form action="{{ path('login') }}" method="post">
+    <div class="mb-6">
+        <!-- <label for="username">Email:</label> -->
+        <input type="text" id="username" name="_username" value="{{ last_username }}" placeholder="Adresse email"/>
+    </div>
+    <div class="mb-6">
+        <!-- <label for="password">Password:</label> -->
+        <input type="password" id="password" name="_password" placeholder="Mot de passe"/>
+    </div>
+    <div class="mb-6">
+        <input type="checkbox" name="remember_me" id="remember_me">
+        <label for="remember_me">Se souvenir de moi</label>
+    </div>
 
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="_password"/>
+    {# If you want to control the URL the user is redirected to on success
+    <input type="hidden" name="_target_path" value="/account" /> #}
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-        {# If you want to control the URL the user is redirected to on success
-        <input type="hidden" name="_target_path" value="/account"/> #}
-
-        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-
-        <button type="submit">login</button>
-    </form>
+    <button type="submit"
+        class="hidden mb-3 p-3 px-6 pt-2 text-white bg-red-500 rounded-full baseline hover:bg-blue-400 md:block">Connexion</button>
+</form>
+<div class="mb-6">
+    <a href="/register">S'enregistrer</a>
+</div>
 {% endblock %}
