@@ -1,14 +1,125 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Enregistrement{% endblock %}
 
 {% block body %}
+<div class="container mx-auto">
     {% for flash_error in app.flashes('verify_email_error') %}
         <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
     {% endfor %}
 
-    <h1>Register</h1>
+    <h1 class="mb-3">S'enregistrer</h1>
 
+    {{ form_start(registrationForm) }}
+        <!--     E-mail     -->
+        <div class="mb-3">
+            {% set class = '' %}
+            {% if not registrationForm.email.vars.valid %}
+                {% set class = 'bg-red-200' %}
+            {% endif %}
+            <input  type="text" 
+                    id="{{ registrationForm.email.vars.id }}" 
+                    name="{{ registrationForm.email.vars.full_name }}" 
+                    value="{{ registrationForm.email.vars.value }}" 
+                    placeholder="Entrez votre email"     
+                    class="{{ class }}"
+            />
+            {{ form_errors(registrationForm.email) }}
+            {% do registrationForm.email.setRendered %}
+        </div>
+
+        <!--     Password input     -->
+        <div class="mb-3">
+            {% set class = '' %}
+            {% if not registrationForm.plainPassword.vars.valid %}
+                {% set class = 'bg-red-200' %}
+            {% endif %}
+            <input  type="text" 
+                    id="{{ registrationForm.plainPassword.vars.id }}" 
+                    name="{{ registrationForm.plainPassword.vars.full_name }}" 
+                    value="{{ registrationForm.plainPassword.vars.value }}" 
+                    placeholder="Entrez votre mot de passe"     
+                    class="{{ class }}"
+            />
+            {{ form_errors(registrationForm.plainPassword) }}
+            {% do registrationForm.plainPassword.setRendered %}
+        </div>
+        <!--     Firstname    -->
+        <div class="mb-3">
+            {% set class = '' %}
+            {% if not registrationForm.firstname.vars.valid %}
+                {% set class = 'bg-red-200' %}
+            {% endif %}
+            <input  type="text" 
+                    id="{{ registrationForm.firstname.vars.id }}" 
+                    name="{{ registrationForm.firstname.vars.full_name }}" 
+                    value="{{ registrationForm.firstname.vars.value }}" 
+                    placeholder="Entrez votre prénom"     
+                    class="{{ class }}"
+            />
+            {{ form_errors(registrationForm.firstname) }}
+            {% do registrationForm.firstname.setRendered %}
+        </div>
+
+        <!--     Lastname    -->
+        <div class="mb-3">
+            {% set class = '' %}
+            {% if not registrationForm.lastname.vars.valid %}
+                {% set class = 'bg-red-200' %}
+            {% endif %}
+            <input  type="text" 
+                    id="{{ registrationForm.lastname.vars.id }}" 
+                    name="{{ registrationForm.lastname.vars.full_name }}" 
+                    value="{{ registrationForm.lastname.vars.value }}" 
+                    placeholder="Entrez votre nom"     
+                    class="{{ class }}"
+            />
+            {{ form_errors(registrationForm.lastname) }}
+            {% do registrationForm.lastname.setRendered %}
+        </div>
+
+        <!--     Phone_1    -->
+        <div class="mb-3">
+            {% set class = '' %}
+            {% if not registrationForm.phone_1.vars.valid %}
+                {% set class = 'bg-red-200' %}
+            {% endif %}
+            <input  type="text" 
+                    id="{{ registrationForm.phone_1.vars.id }}" 
+                    name="{{ registrationForm.phone_1.vars.full_name }}" 
+                    value="{{ registrationForm.phone_1.vars.value }}" 
+                    placeholder="Numéro de téléphone 1"     
+                    class="{{ class }}"
+            />
+            {{ form_errors(registrationForm.phone_1) }}
+            {% do registrationForm.phone_1.setRendered %}
+        </div>
+
+        <!--     Phone_1    -->
+        <div class="mb-3">
+            {% set class = '' %}
+            {% if not registrationForm.phone_2.vars.valid %}
+                {% set class = 'bg-red-200' %}
+            {% endif %}
+            <input  type="text" 
+                    id="{{ registrationForm.phone_2.vars.id }}" 
+                    name="{{ registrationForm.phone_2.vars.full_name }}" 
+                    value="{{ registrationForm.phone_2.vars.value }}" 
+                    placeholder="Numéro de téléphone 2"     
+                    class="{{ class }}"
+            />
+            {{ form_errors(registrationForm.phone_2) }}
+            {% do registrationForm.phone_2.setRendered %}
+        </div>
+
+        {{ form_row(registrationForm.agreeTerms) }}
+        <button type="submit" class="btn">S'enregistrer</button>
+        <div class="bg-red-200">_
+            {{ form_rest(registrationForm) }}
+        </div>
+    {{ form_end(registrationForm) }}
+
+{# 
     {{ form_start(registrationForm) }}
         {{ form_row(registrationForm.email) }}
         {{ form_row(registrationForm.plainPassword, {
@@ -17,5 +128,6 @@
         {{ form_row(registrationForm.agreeTerms) }}
 
         <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+    {{ form_end(registrationForm) }} #}
+</div>
 {% endblock %}
