@@ -3,12 +3,11 @@
 {% block title %}Enregistrement{% endblock %}
 
 {% block body %}
-<div class="container mx-auto">
+    <h1 class="mb-3 text-xl">Veuillez vous enregistrer</h1>
+
     {% for flash_error in app.flashes('verify_email_error') %}
         <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
     {% endfor %}
-
-    <h1 class="mb-3">S'enregistrer</h1>
 
     {{ form_start(registrationForm) }}
         <!--     E-mail     -->
@@ -114,20 +113,9 @@
 
         {{ form_row(registrationForm.agreeTerms) }}
         <button type="submit" class="btn">S'enregistrer</button>
-        <div class="bg-red-200">_
-            {{ form_rest(registrationForm) }}
-        </div>
     {{ form_end(registrationForm) }}
 
-{# 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
-
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }} #}
-</div>
+    <div class="mb-6">
+        <a href="/login" class="underline">Se connecter</a>
+    </div>
 {% endblock %}
