@@ -3,30 +3,22 @@
 namespace App\Form;
 
 use App\Entity\Activity;
-use App\Entity\Region;
 use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ActivityType extends AbstractType
+class ActivityType_old extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('name')
             ->add('description')
-            ->add('website')
-            ->add('localisation')
             ->add('contact', EntityType::class, [
                 'class' => User::class,
                 'choice_label' => 'email',
-                'mapped' => false,
-            ])
-            ->add('region', EntityType::class, [
-                'class' => Region::class,
-                'choice_label' => 'name',
                 'mapped' => false,
             ])
         ;

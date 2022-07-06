@@ -39,6 +39,9 @@ class Activity
     #[ORM\OneToMany(mappedBy: 'activity', targetEntity: Prestation::class)]
     private $prestations;
 
+    #[ORM\ManyToOne(targetEntity: Region::class, inversedBy: 'activities')]
+    private $region;
+
     public function __construct()
     {
         $this->contact = new User();
@@ -196,6 +199,18 @@ class Activity
                 $prestation->setActivity(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getRegion(): ?Region
+    {
+        return $this->region;
+    }
+
+    public function setRegion(?Region $region): self
+    {
+        $this->region = $region;
 
         return $this;
     }

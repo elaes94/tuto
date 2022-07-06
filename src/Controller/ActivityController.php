@@ -14,27 +14,10 @@ use Symfony\Component\Routing\Annotation\Route;
 class ActivityController extends AbstractController
 {
     #[Route('/', name: 'app_activity_index', methods: ['GET'])]
-    public function index(Request $request, ActivityRepository $activityRepository): Response
+    public function index(ActivityRepository $activityRepository): Response
     {
-        $page = $request->query->get('page', 1);
         return $this->render('activity/index.html.twig', [
-            'activities' => $activityRepository->getPage($page)[0],
-            'totalPage' => $activityRepository->getPage($page)[1],
-            'currentPage' => $page,
-        ]);
-    }
-
-    #[Route('/search', name: 'app_activity_search', methods: ['GET'])]
-    public function search(Request $request, ActivityRepository $activityRepository): Response
-    {
-        $searchString = $request->query->get('search', "");
-        var_dump($searchString);
-        $page = $request->query->get('page', 1);
-        return $this->render('activity/index.html.twig', [
-            'activities' => $activityRepository->getPage($page)[0],
-            'totalPage' => $activityRepository->getPage($page)[1],
-            'currentPage' => $page,
-            'searchString' => $searchString,
+            'activities' => $activityRepository->findAll(),
         ]);
     }
 

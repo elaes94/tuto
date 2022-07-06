@@ -19,14 +19,6 @@
                 <th>Description</th>
                 <td>{{ activity.description }}</td>
             </tr>
-            <tr>
-                <th>Website</th>
-                <td>{{ activity.website }}</td>
-            </tr>
-            <tr>
-                <th>Localisation</th>
-                <td>{{ activity.localisation }}</td>
-            </tr>
         </tbody>
     </table>
 
@@ -34,5 +26,5 @@
 
     <a href="{{ path('app_activity_edit', {'id': activity.id}) }}">edit</a>
 
-    {{ include('activity/_delete_form.html.twig') }}
+    {{ include('activity_old/_delete_form.html.twig') }}
 {% endblock %}
