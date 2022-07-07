@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Activity;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
@@ -43,19 +44,27 @@ class ActivityRepository extends ServiceEntityRepository
     public function getPage($page)
     {
         $query = $this->createQueryBuilder('a')
-                    ->getQuery();
+            ->getQuery();
 
         $pageSize = 1;
         $paginator = new Paginator($query);
         $totalItems = count($paginator);
         $pagesCount = ceil($totalItems / $pageSize);
         $paginator
-        ->getQuery()
-        ->setFirstResult($pageSize * ($page-1)) // set the offset
-        ->setMaxResults($pageSize);
+            ->getQuery()
+            ->setFirstResult($pageSize * ($page - 1)) // set the offset
+            ->setMaxResults($pageSize);
 
         return [$paginator, $pagesCount];
     }
+
+    // public function findByUser(User $user)
+    // {
+    //     $query = $this->getEntityManager()->createQuery('SELECT a FROM App\Entity\Activity a WHERE a.contact = ?1');
+    //     $query->setParameter(1, $user->getId());
+    //     $activities = $query->getResult();
+    //     return $activities;
+    // }
 
 //    /**
 //     * @return Activity[] Returns an array of Activity objects
