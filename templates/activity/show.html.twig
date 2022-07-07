@@ -4,6 +4,7 @@
 
 {% block body %}
     <h1>Activity</h1>
+    {{ dump(activity)}}
 
     <table class="table">
         <tbody>
@@ -26,6 +27,14 @@
             <tr>
                 <th>Localisation</th>
                 <td>{{ activity.localisation }}</td>
+            </tr>
+            <tr>
+                <th>Contact</th>
+                <td>{{ activity.contact.email }}</td>
+            </tr>
+            <tr>
+                <th>Region</th>
+                <td>{{ activity.region.name }}</td>
             </tr>
         </tbody>
     </table>

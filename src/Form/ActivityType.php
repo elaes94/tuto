@@ -22,12 +22,10 @@ class ActivityType extends AbstractType
             ->add('contact', EntityType::class, [
                 'class' => User::class,
                 'choice_label' => 'email',
-                'mapped' => false,
             ])
             ->add('region', EntityType::class, [
                 'class' => Region::class,
                 'choice_label' => 'name',
-                'mapped' => false,
             ])
         ;
     }

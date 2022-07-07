@@ -46,6 +46,23 @@ class ProfilController extends AbstractController
             'activity' => $activity,
             'form' => $form,
         ]);
-        // return $this->render('profil/activity/new.html.twig');
+    }
+
+    #[Route('/{id}/edit', name: 'app_profil_activity_edit', methods: ['GET', 'POST'])]
+    public function edit(Request $request, Activity $activity, ActivityRepository $activityRepository): Response
+    {
+        $form = $this->createForm(ActivityType::class, $activity);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $activityRepository->add($activity, true);
+
+            return $this->redirectToRoute('app_profil', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('profil/activity/edit.html.twig', [
+            'activity' => $activity,
+            'form' => $form,
+        ]);
     }
 }

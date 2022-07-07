@@ -43,6 +43,7 @@
                 <th>Description</th>
                 <th>Website</th>
                 <th>Localisation</th>
+                <th>Region</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -54,9 +55,10 @@
                 <td>{{ activity.description }}</td>
                 <td>{{ activity.website }}</td>
                 <td>{{ activity.localisation }}</td>
+                <td>{{ activity.region.name }}</td>
                 <td>
                     <a href="{{ path('app_activity_show', {'id': activity.id}) }}">show</a>
-                    <a href="{{ path('app_activity_edit', {'id': activity.id}) }}">edit</a>
+                    <a href="{{ path('app_profil_activity_edit', {'id': activity.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
