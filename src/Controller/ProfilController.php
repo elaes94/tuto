@@ -54,7 +54,7 @@ class ProfilController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_profil_activity_show', methods: ['GET'])]
+    #[Route('/activity/{id}', name: 'app_profil_activity_show', methods: ['GET'])]
     public function showActivity(Activity $activity): Response
     {
         return $this->render('profil/activity/show.html.twig', [
@@ -62,7 +62,7 @@ class ProfilController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_profil_activity_edit', methods: ['GET', 'POST'])]
+    #[Route('/activity/{id}/edit', name: 'app_profil_activity_edit', methods: ['GET', 'POST'])]
     public function editActivity(Request $request, Activity $activity, ActivityRepository $activityRepository): Response
     {
         $form = $this->createForm(ActivityType::class, $activity);
@@ -80,7 +80,7 @@ class ProfilController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_profil_activity_delete', methods: ['POST'])]
+    #[Route('/activity/{id}', name: 'app_profil_activity_delete', methods: ['POST'])]
     public function deleteActivity(Request $request, Activity $activity, ActivityRepository $activityRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$activity->getId(), $request->request->get('_token'))) {
@@ -111,21 +111,58 @@ class ProfilController extends AbstractController
         ]);
     }
 
-    /*****          Product       ****/ 
-    #[Route('/product/new', name: 'app_profil_product_new', methods: ['GET', 'POST'])]
-    public function newProduct(Request $request, ProductRepository $productRepository): Response
+    #[Route('/prestation/{id}/edit', name: 'app_profil_prestation_edit', methods: ['GET', 'POST'])]
+    public function editPrestation(Request $request, Prestation $prestation, PrestationRepository $prestationRepository): Response
     {
-        $product = new Product();
+        $form = $this->createForm(PrestationType::class, $prestation);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $prestationRepository->add($prestation, true);
+
+            return $this->redirectToRoute('app_profil_activity_show', ['id' => $prestation->getActivity()->getId(),], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('profil/prestation/edit.html.twig', [
+            'prestation' => $prestation,
+            'form' => $form,
+        ]);
+    }
+
+    /*****          Product       ****/ 
+    #[Route('/product/{id}/new', name: 'app_profil_product_new', methods: ['GET', 'POST'])]
+    public function newproduct(Request $request, Activity $activity, ProductRepository $productRepository): Response
+    {
+        $product = new product();
+        $product->setActivity($activity);
+        $form = $this->createForm(productType::class, $product);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $productRepository->add($product, true);
+
+            return $this->redirectToRoute('app_profil_activity_show', ['id' => $activity->getId(),], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('profil/product/new.html.twig', [
+            'product' => $product,
+            'form' => $form,
+        ]);
+    }
+
+    #[Route('/product/{id}/edit', name: 'app_profil_product_edit', methods: ['GET', 'POST'])]
+    public function editProduct(Request $request, product $product, ProductRepository $productRepository): Response
+    {
         $form = $this->createForm(ProductType::class, $product);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $productRepository->add($product, true);
 
-            return $this->redirectToRoute('app_product_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_profil_activity_show', ['id' => $product->getActivity()->getId(),], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('product/new.html.twig', [
+        return $this->renderForm('profil/product/edit.html.twig', [
             'product' => $product,
             'form' => $form,
         ]);
