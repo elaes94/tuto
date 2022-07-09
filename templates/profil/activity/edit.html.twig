@@ -4,8 +4,7 @@
 
 {% block body %}
     <h1 class="mb-3 text-xl">Modification activité</h1>
-
-{{ dump(form)}}
+    
     {{ form_start(form) }}
         <!--     Activity Name     -->
         <div class="mb-3">
@@ -103,11 +102,11 @@
                     class="{{ class }}"                    
             >
 
-            {% for region in form.region.vars.choices %}
-                <option value="{{ region.value }}" {% if region is selectedchoice(activity.region.id) %} selected="selected"{% endif %}>{{ region.label }}</option>
-            {% else %}
-                <option value="0">no value found</option>
-            {% endfor %}
+                {% for region in form.region.vars.choices %}
+                    <option value="{{ region.value }}" {% if region is selectedchoice(activity.region.id) %} selected="selected"{% endif %}>{{ region.label }}</option>
+                {% else %}
+                    <option value="0">no value found</option>
+                {% endfor %}
             </select>
             {{ form_errors(form.region) }}
             {% do form.region.setRendered %}
@@ -120,5 +119,5 @@
     </div>
     {{ form_end(form) }}
 
-    <a href="{{ path('app_profil') }}">retour</a>
+    <a href="{{ path('app_profil_activity_show', {'id': activity.id}) }}">retour</a>
 {% endblock %}

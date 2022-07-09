@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modification activité{% endblock %}
+
+{% block body %}
+
+<div class="m-5">
+    <a href="{{ path('app_profil') }}" class="btn">Retour</a>
+
+    <a href="{{ path('app_profil_activity_edit', {'id': activity.id}) }}" class="btn">Modifier</a>
+</div>
+
+<div class="m-3">
+    <p class="text-2xl font-bold">{{ activity.name }}</p>
+    <p>{{ activity.localisation }} - {{ activity.region.name }}</p>
+    <p class="text-blue-500 hover:underline">{{ activity.website }}</p>
+    <p>{{ activity.description }}</p>
+</div>
+<div class="mb-10">
+    <h1 class="text-xl">Services</h1>
+    <a href="{{ path('app_profil_prestation_new', {'id': activity.id}) }}" class="btn">Ajouter un service</a>
+    <ul class="list-disc m-3">
+        {% for prestation in activity.prestations %}
+                <li>{{ prestation.name }}</li>
+        {% else %}
+                <li colspan="3"></li>
+        {% endfor %}
+    </ul>
+</div>
+<div class="mb-10">
+    <a href="{{ path('app_profil_product_new') }}" class="btn">Ajouter un produit</a>
+</div>
+
+    
+
+    {{ include('profil/activity/_delete_form.html.twig') }}
+{% endblock %}
