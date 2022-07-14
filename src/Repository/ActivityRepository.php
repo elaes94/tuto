@@ -58,6 +58,14 @@ class ActivityRepository extends ServiceEntityRepository
         return [$paginator, $pagesCount];
     }
 
+    public function search($searchString)
+    {
+        $query = $this->getEntityManager()->createQuery('SELECT a FROM App\Entity\Activity a WHERE a.name LIKE ?1');
+        $query->setParameter(1, '%'.$searchString.'%');
+        $activities = $query->getResult();
+        return $activities;
+    }
+
     // public function findByUser(User $user)
     // {
     //     $query = $this->getEntityManager()->createQuery('SELECT a FROM App\Entity\Activity a WHERE a.contact = ?1');
