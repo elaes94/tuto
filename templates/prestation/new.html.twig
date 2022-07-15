@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Prestation{% endblock %}
+{% block title %}Service{% endblock %}
 
 {% block body %}
-    <h1>Create new Prestation</h1>
+    <h1>Ajout d'un service</h1>
 
     {{ include('prestation/_form.html.twig') }}
 
-    <a href="{{ path('app_prestation_index') }}">back to list</a>
+    <a href="{{ path('app_activity_show', {'id': form.activity.vars.value}) }}">retour</a>
 {% endblock %}

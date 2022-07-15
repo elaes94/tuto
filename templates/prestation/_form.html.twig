@@ -1,4 +1,49 @@
-{{ form_start(form) }}
+{# {{ form_start(form) }}
     {{ form_widget(form) }}
     <button class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
+{{ form_end(form) }} #}
+
+{{ form_start(form) }}
+        <!--     Prestation Name     -->
+        <div class="mb-3">
+            {% set class = '' %}
+            {% if not form.name.vars.valid %}
+                {% set class = 'bg-red-200' %}
+            {% endif %}
+            <input  type="text" 
+                    id="{{ form.name.vars.id }}" 
+                    name="{{ form.name.vars.full_name }}" 
+                    value="{{ form.name.vars.value }}" 
+                    placeholder="Nom du service"     
+                    class="{{ class }}"
+            />
+            {{ form_errors(form.name) }}
+            {% do form.name.setRendered %}
+        </div>
+
+
+        <!--     Prestation Activity     -->
+        <div class="mb-3 hidden">
+            {% set class = '' %}
+            {% if not form.activity.vars.valid %}
+                {% set class = 'bg-red-200' %}
+            {% endif %}
+            <select id="{{ form.activity.vars.id }}" 
+                    name="{{ form.activity.vars.full_name }}"
+                    class="{{ class }}"
+            >
+                {% for activity in form.activity.vars.choices %}
+                    <option value="{{ activity.value }}" {% if activity is selectedchoice(form.activity.vars.value) %} selected="selected"{% endif %}>{{ activity.label }}</option>
+                {% else %}
+                    <option value="0">no value found</option>
+                {% endfor %}
+            </select>
+            {{ form_errors(form.activity) }}
+            {% do form.activity.setRendered %}
+        </div>
+
+    <button type="submit" class="btn">{{ button_label|default('Sauvegarder') }}</button>
+    <div class="bg-red-200">
+        {{ form_rest(form) }}
+    </div>
+    {{ form_end(form) }}

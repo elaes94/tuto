@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Activity;
 use App\Entity\Prestation;
 use App\Form\PrestationType;
 use App\Repository\PrestationRepository;
@@ -21,17 +22,18 @@ class PrestationController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_prestation_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, PrestationRepository $prestationRepository): Response
+    #[Route('/{id}/new', name: 'app_prestation_new', methods: ['GET', 'POST'])]
+    public function new(Request $request, Activity $activity, PrestationRepository $prestationRepository): Response
     {
         $prestation = new Prestation();
+        $prestation->setActivity($activity);
         $form = $this->createForm(PrestationType::class, $prestation);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $prestationRepository->add($prestation, true);
 
-            return $this->redirectToRoute('app_prestation_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_activity_show', ['id' => $activity->getId(),], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('prestation/new.html.twig', [
@@ -57,7 +59,7 @@ class PrestationController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $prestationRepository->add($prestation, true);
 
-            return $this->redirectToRoute('app_prestation_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_activity_show', ['id' => $prestation->getActivity()->getId(),] , Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('prestation/edit.html.twig', [
