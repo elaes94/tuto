@@ -1,4 +1,115 @@
-{{ form_start(form) }}
+{# {{ form_start(form) }}
     {{ form_widget(form) }}
     <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }} #}
+
+{{ form_start(form) }}
+    <!--     User Firstname     -->
+    <div class="mb-3">
+        {% set class = '' %}
+        {% if not form.firstname.vars.valid %}
+            {% set class = 'bg-red-200' %}
+        {% endif %}
+        <input  type="text" 
+                id="{{ form.firstname.vars.id }}" 
+                name="{{ form.firstname.vars.full_name }}" 
+                value="{{ form.firstname.vars.value }}" 
+                placeholder="Prénom"     
+                class="{{ class }}"
+        />
+        {{ form_errors(form.firstname) }}
+        {% do form.firstname.setRendered %}
+    </div>
+
+    <!--     User lastname     -->
+    <div class="mb-3">
+        {% set class = '' %}
+        {% if not form.lastname.vars.valid %}
+            {% set class = 'bg-red-200' %}
+        {% endif %}
+        <input  type="text" 
+                id="{{ form.lastname.vars.id }}" 
+                name="{{ form.lastname.vars.full_name }}" 
+                value="{{ form.lastname.vars.value }}" 
+                placeholder="Nom"     
+                class="{{ class }}"
+        />
+        {{ form_errors(form.lastname) }}
+        {% do form.lastname.setRendered %}
+    </div>
+
+    <!--     User E-mail     -->
+    <div class="mb-3">
+        {% set class = '' %}
+        {% if not form.email.vars.valid %}
+            {% set class = 'bg-red-200' %}
+        {% endif %}
+        <input  type="text" 
+                id="{{ form.email.vars.id }}" 
+                name="{{ form.email.vars.full_name }}" 
+                value="{{ form.email.vars.value }}" 
+                placeholder="e-mail"     
+                class="{{ class }}"
+        />
+        {{ form_errors(form.email) }}
+        {% do form.email.setRendered %}
+    </div>
+
+    <!--     User phone 1     -->
+    <div class="mb-3">
+        {% set class = '' %}
+        {% if not form.phone_1.vars.valid %}
+            {% set class = 'bg-red-200' %}
+        {% endif %}
+        <input  type="text" 
+                id="{{ form.phone_1.vars.id }}" 
+                name="{{ form.phone_1.vars.full_name }}" 
+                value="{{ form.phone_1.vars.value }}" 
+                placeholder="Numéro de téléphone n°1"     
+                class="{{ class }}"
+        />
+        {{ form_errors(form.phone_1) }}
+        {% do form.phone_1.setRendered %}
+    </div>
+
+    <!--     User phone 2     -->
+    <div class="mb-3">
+        {% set class = '' %}
+        {% if not form.phone_2.vars.valid %}
+            {% set class = 'bg-red-200' %}
+        {% endif %}
+        <input  type="text" 
+                id="{{ form.phone_2.vars.id }}" 
+                name="{{ form.phone_2.vars.full_name }}" 
+                value="{{ form.phone_2.vars.value }}" 
+                placeholder="Numéro de téléphone n°2"     
+                class="{{ class }}"
+        />
+        {{ form_errors(form.phone_2) }}
+        {% do form.phone_2.setRendered %}
+    </div>
+
+    <!--     User Is Verified     -->
+    <div class="mb-3">
+        {% set class = '' %}
+        {% if not form.isVerified.vars.valid %}
+            {% set class = 'bg-red-200' %}
+        {% endif %}
+        <input  type="checkbox" 
+                id="{{ form.isVerified.vars.id }}" 
+                name="{{ form.isVerified.vars.full_name }}" 
+                value="{{ form.isVerified.vars.value }}"
+                {% if form.isVerified.vars.data %}
+                    {{ 'checked'}}
+                {% endif %}
+        />
+        <label>est vérifié</label>
+        {{ form_errors(form.isVerified) }}
+        {% do form.isVerified.setRendered %}
+    </div>
+
+    <button type="submit" class="btn">{{ button_label|default('Sauvegarder') }}</button>
+    <div class="bg-red-200">
+        {{ form_rest(form) }}
+    </div>
 {{ form_end(form) }}

@@ -1,28 +1,23 @@
-{# {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }} #}
-
- {{ form_start(form) }}
-        <!--     Prestation Name     -->
-        <div class="mb-3">
-            {% set class = '' %}
-            {% if not form.name.vars.valid %}
-                {% set class = 'bg-red-200' %}
-            {% endif %}
-            <input  type="text" 
-                    id="{{ form.name.vars.id }}" 
-                    name="{{ form.name.vars.full_name }}" 
-                    value="{{ form.name.vars.value }}" 
-                    placeholder="Nom de la région"     
-                    class="{{ class }}"
-            />
-            {{ form_errors(form.name) }}
-            {% do form.name.setRendered %}
-        </div>
+{{ form_start(form) }}
+    <!--     Prestation Name     -->
+    <div class="mb-3">
+        {% set class = '' %}
+        {% if not form.name.vars.valid %}
+            {% set class = 'bg-red-200' %}
+        {% endif %}
+        <input  type="text" 
+                id="{{ form.name.vars.id }}" 
+                name="{{ form.name.vars.full_name }}" 
+                value="{{ form.name.vars.value }}" 
+                placeholder="Nom de la région"     
+                class="{{ class }}"
+        />
+        {{ form_errors(form.name) }}
+        {% do form.name.setRendered %}
+    </div>
 
     <button type="submit" class="btn">Sauvegarder</button>
     <div class="bg-red-200">
         {{ form_rest(form) }}
     </div>
-    {{ form_end(form) }}
+{{ form_end(form) }}
