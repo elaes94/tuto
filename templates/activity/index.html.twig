@@ -1,41 +1,30 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Activity index{% endblock %}
+{% block title %}Activités{% endblock %}
 
 {% block body %}
-    <h1>Activity index</h1>
+    <h1>Liste des activités</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Website</th>
-                <th>Localisation</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for activity in activities %}
-            <tr>
-                <td>{{ activity.id }}</td>
-                <td>{{ activity.name }}</td>
-                <td>{{ activity.description }}</td>
-                <td>{{ activity.website }}</td>
-                <td>{{ activity.localisation }}</td>
-                <td>
-                    <a href="{{ path('app_activity_show', {'id': activity.id}) }}">show</a>
-                    <a href="{{ path('app_activity_edit', {'id': activity.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="6">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <section class="border-2 border-black p-3">
+    <h1 class="mb-3">Liste des activités</h1>
+    <a href="{{ path('app_activity_new') }}" class="btn">Créer</a>
 
-    <a href="{{ path('app_activity_new') }}">Create new</a>
+    <div class="flex flex-wrap justify-items-stretch">
+    {% for activity in activities %}
+        <div class="basis-1 md:basis-1/4 m-5">
+            <a href="{{ path('app_activity_show', {'id': activity.id}) }}">
+                <div class="block p-6 rounded-lg shadow-lg border-2 bg-white min-h-full">
+                    <h5 class="text-gray-900 text-xl leading-tight font-medium mb-2">{{ activity.name }}</h5>
+                    <p>{{ activity.region.name }} - {{ activity.localisation }}</p>
+                    <p class="text-gray-700 text-base mb-4">
+                    {{ activity.description }}
+                    </p>
+                </div>
+            </a>
+        </div>
+    {% else %}
+        <p>Aucune activité</p>
+    {% endfor %}
+    </div>
+</section>
 {% endblock %}

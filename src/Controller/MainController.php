@@ -22,7 +22,6 @@ class MainController extends AbstractController
     public function search(Request $request, ActivityRepository $activityRepository): Response
     {
         $searchString = $request->query->get('search', "");
-        var_dump($searchString);
         return $this->render('main/index.html.twig', [
             'activities' => $activityRepository->search($searchString),
             'searchString' => $searchString,

@@ -4,25 +4,120 @@
 {{ form_end(form) }} #}
 
 {{ form_start(form) }}
-    <!--     Prestation Name     -->
-    <div class="mb-3">
-        {% set class = '' %}
-        {% if not form.name.vars.valid %}
-            {% set class = 'bg-red-200' %}
-        {% endif %}
-        <input  type="text" 
-                id="{{ form.name.vars.id }}" 
-                name="{{ form.name.vars.full_name }}" 
-                value="{{ form.name.vars.value }}" 
-                placeholder="Nom de la région"     
-                class="{{ class }}"
-        />
-        {{ form_errors(form.name) }}
-        {% do form.name.setRendered %}
-    </div>
+        <!--     Activity Name     -->
+        <div class="mb-3">
+            {% set class = '' %}
+            {% if not form.name.vars.valid %}
+                {% set class = 'bg-red-200' %}
+            {% endif %}
+            <input  type="text" 
+                    id="{{ form.name.vars.id }}" 
+                    name="{{ form.name.vars.full_name }}" 
+                    value="{{ form.name.vars.value }}" 
+                    placeholder="Nom de l'activité"     
+                    class="{{ class }}"
+            />
+            {{ form_errors(form.name) }}
+            {% do form.name.setRendered %}
+        </div>
 
-    <button type="submit" class="btn">Sauvegarder</button>
+        <!--     Activity Name     -->
+        <div class="mb-3">
+            {% set class = '' %}
+            {% if not form.description.vars.valid %}
+                {% set class = 'bg-red-200' %}
+            {% endif %}
+            <input  type="text" 
+                    id="{{ form.description.vars.id }}" 
+                    name="{{ form.description.vars.full_name }}" 
+                    value="{{ form.description.vars.value }}" 
+                    placeholder="Description"     
+                    class="{{ class }}"
+            />
+            {{ form_errors(form.description) }}
+            {% do form.description.setRendered %}
+        </div>
+
+        <!--     Activity website     -->
+        <div class="mb-3">
+            {% set class = '' %}
+            {% if not form.website.vars.valid %}
+                {% set class = 'bg-red-200' %}
+            {% endif %}
+            <input  type="text" 
+                    id="{{ form.website.vars.id }}" 
+                    name="{{ form.website.vars.full_name }}" 
+                    value="{{ form.website.vars.value }}" 
+                    placeholder="site internet"     
+                    class="{{ class }}"
+            />
+            {{ form_errors(form.website) }}
+            {% do form.website.setRendered %}
+        </div>
+
+        <!--     Activity Localisation     -->
+        <div class="mb-3">
+            {% set class = '' %}
+            {% if not form.localisation.vars.valid %}
+                {% set class = 'bg-red-200' %}
+            {% endif %}
+            <input  type="text" 
+                    id="{{ form.localisation.vars.id }}" 
+                    name="{{ form.localisation.vars.full_name }}" 
+                    value="{{ form.localisation.vars.value }}" 
+                    placeholder="localisation"     
+                    class="{{ class }}"
+            />
+            {{ form_errors(form.localisation) }}
+            {% do form.localisation.setRendered %}
+        </div>
+
+        <!--     Activity Contact     -->
+        <div class="mb-3 hidden">
+            {% set class = '' %}
+            {% if not form.contact.vars.valid %}
+                {% set class = 'bg-red-200' %}
+            {% endif %}
+            <input  type="text" 
+                    id="{{ form.contact.vars.id }}" 
+                    name="{{ form.contact.vars.full_name }}" 
+                    value="{{ form.contact.vars.value }}" 
+                    placeholder="contact"     
+                    class="{{ class }}"
+            />
+            {{ form_errors(form.contact) }}
+            {% do form.contact.setRendered %}
+        </div>
+
+        <!--     Activity Region     -->
+        <div class="mb-3">
+            {% set class = '' %}
+            {% if not form.region.vars.valid %}
+                {% set class = 'bg-red-200' %}
+            {% endif %}
+            <select id="{{ form.region.vars.id }}" 
+                    name="{{ form.region.vars.full_name }}"
+                    class="{{ class }}"                    
+            >
+
+                {% for region in form.region.vars.choices %}
+                    <option value="{{ region.value }}"
+                    {% if activity.region != null %}
+                        {% if region is selectedchoice(activity.region.id) %} selected="selected"{% endif %}
+                    {% endif %}>
+                        {{ region.label }}
+                    </option>
+                {% else %}
+                    <option value="0">no value found</option>
+                {% endfor %}
+            </select>
+            {{ form_errors(form.region) }}
+            {% do form.region.setRendered %}
+        </div>
+        {# {{ form_row(form.region) }} #}
+
+    <button type="submit" class="btn">{{ button_label|default('Sauvegarder') }}</button>
     <div class="bg-red-200">
         {{ form_rest(form) }}
     </div>
-{{ form_end(form) }}
+    {{ form_end(form) }}

@@ -3,44 +3,40 @@
 {% block title %}Activity{% endblock %}
 
 {% block body %}
-    <h1>Activity</h1>
+    <div class="m-5">
+        <a href="{{ path('app_activity_index') }}" class="btn">Retour</a>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ activity.id }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
-                <td>{{ activity.name }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ activity.description }}</td>
-            </tr>
-            <tr>
-                <th>Website</th>
-                <td>{{ activity.website }}</td>
-            </tr>
-            <tr>
-                <th>Localisation</th>
-                <td>{{ activity.localisation }}</td>
-            </tr>
-            <tr>
-                <th>Contact</th>
-                <td>{{ activity.contact.email }}</td>
-            </tr>
-            <tr>
-                <th>Region</th>
-                <td>{{ activity.region.name }}</td>
-            </tr>
-        </tbody>
-    </table>
+        <a href="{{ path('app_activity_edit', {'id': activity.id}) }}" class="btn">Modifier</a>
+    </div>
 
-    <a href="{{ path('app_activity_index') }}">back to list</a>
+    <div class="m-3">
+        <p class="text-2xl font-bold">{{ activity.name }}</p>
+        <p>{{ activity.localisation }} - {{ activity.region.name }}</p>
+        <p class="text-blue-500 hover:underline">{{ activity.website }}</p>
+        <p>{{ activity.description }}</p>
+    </div>
+    <div class="mb-10">
+        <h1 class="text-xl">Services</h1>
+        <a href="{{ path('app_prestation_new', {'id': activity.id}) }}" class="btn">Ajouter un service</a>
+        <ul class="list-disc m-3">
+            {% for prestation in activity.prestations %}
+                    <li><a href="{{ path('app_prestation_edit', {'id': prestation.id}) }}" class="hover:underline">{{ prestation.name }}</a></li>
+            {% else %}
+                    <li colspan="3">Aucun service</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="mb-10">
+        <h1 class="text-xl">Produit</h1>
+        <a href="{{ path('app_product_new', {'id': activity.id}) }}" class="btn">Ajouter un produit</a>
+        <ul class="list-disc m-3">
+            {% for product in activity.products %}
+                    <li><a href="{{ path('app_product_edit', {'id': product.id}) }}" class="hover:underline">{{ product.name }}</a></li>
+            {% else %}
+                    <li colspan="3">Aucun produit</li>
+            {% endfor %}
+        </ul>
+    </div>    
 
-    <a href="{{ path('app_activity_edit', {'id': activity.id}) }}">edit</a>
-
-    {{ include('activity/_delete_form.html.twig') }}
+    {# {{ include('activity/_delete_form.html.twig') }} #}
 {% endblock %}

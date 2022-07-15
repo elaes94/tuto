@@ -3,39 +3,8 @@
 {% block title %}Utilisateur{% endblock %}
 
 {% block body %}
-    <h1 class="mb-2">Utilisateur</h1>
+    <h1 class="mb-2">Liste des utilisateurs</h1>
 
-    <table class="mb-2 border-collapse border border-slate-400">
-        <thead>
-            <tr>
-                <th class="p-2 border border-slate-300">Id</th>
-                <th class="p-2 border border-slate-300">Email</th>
-                <th class="p-2 border border-slate-300">Roles</th>
-                <th class="p-2 border border-slate-300">Password</th>
-                <th class="p-2 border border-slate-300">IsVerified</th>
-                <th class="p-2 border border-slate-300">actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for user in users %}
-            <tr>
-                <td class="p-2 border border-slate-300">{{ user.id }}</td>
-                <td class="p-2 border border-slate-300">{{ user.email }}</td>
-                <td class="p-2 border border-slate-300">{{ user.roles ? user.roles|json_encode : '' }}</td>
-                <td class="p-2 border border-slate-300">{{ user.password }}</td>
-                <td class="p-2 border border-slate-300">{{ user.isVerified ? 'Yes' : 'No' }}</td>
-                <td class="p-2 border border-slate-300">
-                    <a class="p-1 bg-sky-500 rounded-lg" href="{{ path('app_user_show', {'id': user.id}) }}">show</a>
-                    <a class="p-1 bg-sky-500 rounded-lg" href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="6">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
 
     <div class="flex flex-wrap justify-items-stretch">
     {% for user in users %}
