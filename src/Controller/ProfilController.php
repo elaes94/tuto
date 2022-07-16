@@ -9,6 +9,7 @@ use App\Entity\User;
 use App\Form\ActivityType;
 use App\Form\PrestationType;
 use App\Form\ProductType;
+use App\Form\UserType;
 use App\Repository\ActivityRepository;
 use App\Repository\PrestationRepository;
 use App\Repository\ProductRepository;
@@ -22,14 +23,22 @@ use Symfony\Component\Routing\Annotation\Route;
 class ProfilController extends AbstractController
 {
     #[Route('/', name: 'app_profil')]
-    public function index(UserRepository $userRepository, ActivityRepository $activityRepository): Response
+    public function edit(Request $request, UserRepository $userRepository): Response
     {
         /** @var User $user */
         $user = $this->getUser();
-        
-        return $this->render('profil/index.html.twig', [
+        $form = $this->createForm(UserType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $userRepository->add($user, true);
+
+            return $this->redirectToRoute('app_profil', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('profil/edit.html.twig', [
             'user' => $user,
-            'activities' => $activityRepository->findBy(['contact' => $user->getId()]),
+            'form' => $form,
         ]);
     }
 

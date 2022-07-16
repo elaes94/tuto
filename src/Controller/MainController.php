@@ -29,7 +29,7 @@ class MainController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_main_activity_show', methods: ['GET'])]
+    #[Route('/show/{id}', name: 'app_main_activity_show', methods: ['GET'])]
     public function show(Activity $activity): Response
     {
         return $this->render('main/activity/show.html.twig', [
