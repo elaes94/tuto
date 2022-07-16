@@ -44,7 +44,7 @@ class Activity
 
     public function __construct()
     {
-        $this->contact = new User();
+        // $this->contact = new User();
         $this->comments = new ArrayCollection();
         $this->products = new ArrayCollection();
         $this->prestations = new ArrayCollection();

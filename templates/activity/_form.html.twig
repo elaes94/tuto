@@ -73,7 +73,7 @@
         </div>
 
         <!--     Activity Contact     -->
-        <div class="mb-3 hidden">
+        {# <div class="mb-3 hidden">
             {% set class = '' %}
             {% if not form.contact.vars.valid %}
                 {% set class = 'bg-red-200' %}
@@ -87,7 +87,35 @@
             />
             {{ form_errors(form.contact) }}
             {% do form.contact.setRendered %}
+        </div> #}
+
+        <!--     Activity Contact     -->
+        <div class="mb-3">
+            {% set class = '' %}
+            {% if not form.contact.vars.valid %}
+                {% set class = 'bg-red-200' %}
+            {% endif %}
+            <select id="{{ form.contact.vars.id }}" 
+                    name="{{ form.contact.vars.full_name }}"
+                    class="{{ class }}"                    
+            >
+
+                {% for contact in form.contact.vars.choices %}
+                    <option value="{{ contact.value }}"
+                    {% if activity.contact != null %}
+                        {% if contact is selectedchoice(activity.contact.id) %} selected="selected"{% endif %}
+                    {% endif %}>
+                        {{ contact.label }}
+                    </option>
+                {% else %}
+                    <option value="0">no value found</option>
+                {% endfor %}
+            </select>
+            {{ form_errors(form.contact) }}
+            {% do form.contact.setRendered %}
         </div>
+
+    {# {{ form_row(form.contact) }} #}
 
         <!--     Activity Region     -->
         <div class="mb-3">

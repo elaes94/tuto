@@ -26,7 +26,7 @@ class ActivityController extends AbstractController
     {
         $activity = new Activity();
 
-        $activity->setContact($this->getUser());
+        // $activity->setContact($this->getUser());
         $form = $this->createForm(ActivityType::class, $activity);
         $form->handleRequest($request);
 
