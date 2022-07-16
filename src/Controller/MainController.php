@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Activity;
 use App\Repository\ActivityRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,6 +26,14 @@ class MainController extends AbstractController
         return $this->render('main/index.html.twig', [
             'activities' => $activityRepository->search($searchString),
             'searchString' => $searchString,
+        ]);
+    }
+
+    #[Route('/{id}', name: 'app_main_activity_show', methods: ['GET'])]
+    public function show(Activity $activity): Response
+    {
+        return $this->render('main/activity/show.html.twig', [
+            'activity' => $activity,
         ]);
     }
 

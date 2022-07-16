@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}MaLink | {{ activity.name }}{% endblock %}
+
+{% block body %}
+
+    <div class="m-3">
+        <p class="text-2xl font-bold">{{ activity.name }}</p>
+        <p>{{ activity.localisation }} - {{ activity.region.name }}</p>
+        <p class="text-blue-500 hover:underline">{{ activity.website }}</p>
+        <p>{{ activity.description }}</p>
+    </div>
+    {% if activity.prestations|length > 0 %}
+    <div class="mx-3 py-5 border-t-2">
+        <h1 class="text-xl">Services</h1>
+        <ul class="list-disc m-3">
+            {% for prestation in activity.prestations %}
+                    <li><a href="{{ path('app_prestation_edit', {'id': prestation.id}) }}" class="hover:underline">{{ prestation.name }}</a></li>
+            {% else %}
+                    <li colspan="3">Aucun service</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+    {% if activity.products|length > 0 %}
+    <div class="mx-3 py-5 border-t-2">
+        <h1 class="text-xl">Produit</h1>
+        <ul class="list-disc m-3">
+            {% for product in activity.products %}
+                    <li><a href="{{ path('app_product_edit', {'id': product.id}) }}" class="hover:underline">{{ product.name }}</a></li>
+            {% else %}
+                    <li colspan="3">Aucun produit</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+    <a href="{{ app.request.headers.get('referer') }}">Retour</a>
+{% endblock %}
