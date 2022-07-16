@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/region')]
+#[Route('/admin/region')]
 class RegionController extends AbstractController
 {
     #[Route('/', name: 'app_region_index', methods: ['GET'])]

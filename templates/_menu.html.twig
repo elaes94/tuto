@@ -10,13 +10,10 @@
     </div>
     <!-- Menu Items -->
     <div class="hidden space-x-6 md:flex">
-      <a href="/test" class="hover:text-blue-400">Test</a>
-      <a href="/user" class="hover:text-blue-400">User</a>
-      <a href="/activity" class="hover:text-blue-400">Activity</a>
-      <a href="/comment" class="hover:text-blue-400">Comment</a>
-      <a href="/region" class="hover:text-blue-400">Region</a>
-      <a href="/prestation" class="hover:text-blue-400">Prestation</a>
-      <a href="/product" class="hover:text-blue-400">Product</a>
+      <a href="{{ path('app_user_index') }}" class="hover:text-blue-400">Utilisateur</a>
+      <a href="{{ path('app_activity_index') }}" class="hover:text-blue-400">Activité</a>
+      {# <a href="/comment" class="hover:text-blue-400">Comment</a> #}
+      <a href="{{ path('app_region_index') }}" class="hover:text-blue-400">Région</a>
     </div>
     <!-- Button -->
     <div class="hidden md:flex space-x-6">
@@ -24,7 +21,7 @@
         Profil
       </a>
       <a href="/logout" class="btn">
-        Logout
+        Déconnexion
       </a>
     </div>
 
@@ -40,13 +37,10 @@
   <div class="md:hidden">
     <div id="menu"
       class="absolute flex-col items-center hidden self-end py-8 mt-10 space-y-6 font-bold bg-white sm:w-auto sm:self-center left-6 right-6 drop-shadow-md">
-      <a href="/test">Test</a>
-      <a href="/user">User</a>
-      <a href="/activity">Activity</a>
-      <a href="/comment">Comment</a>
-      <a href="/region">Region</a>
-      <a href="/prestation">Prestation</a>
-      <a href="/product">Product</a>
+      <a href="{{ path('app_user_index') }}">Utilisateur</a>
+      <a href="{{ path('app_activity_index') }}">Activité</a>
+      {# <a href="/comment">Comment</a> #}
+      <a href="{{ path('app_region_index') }}">Région</a>
     </div>
   </div>
 </nav>
