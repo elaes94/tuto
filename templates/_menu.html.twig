@@ -5,24 +5,23 @@
     <!-- Logo -->
     <div class="pt-2">
       <a href="/">
-        <img src="" alt="Malink" />
+        {# <img src="" alt="Malink" /> #}
+        Accueil
       </a>
     </div>
-    <!-- Menu Items -->
-    <div class="hidden space-x-6 md:flex">
-      <a href="{{ path('app_user_index') }}" class="hover:text-blue-400">Utilisateur</a>
-      <a href="{{ path('app_activity_index') }}" class="hover:text-blue-400">Activité</a>
-      {# <a href="/comment" class="hover:text-blue-400">Comment</a> #}
-      <a href="{{ path('app_region_index') }}" class="hover:text-blue-400">Région</a>
-    </div>
+    {% if is_granted('ROLE_ADMIN') %}
+      <!-- Menu Items -->
+      <div class="hidden space-x-6 md:flex">
+        <a href="{{ path('app_user_index') }}" class="hover:text-blue-400">Utilisateur</a>
+        <a href="{{ path('app_activity_index') }}" class="hover:text-blue-400">Activité</a>
+        {# <a href="/comment" class="hover:text-blue-400">Comment</a> #}
+        <a href="{{ path('app_region_index') }}" class="hover:text-blue-400">Région</a>
+      </div>
+    {% endif %}
     <!-- Button -->
     <div class="hidden md:flex space-x-6">
-      <a href="/profil" class="btn">
-        Profil
-      </a>
-      <a href="/logout" class="btn">
-        Déconnexion
-      </a>
+      <a href="/profil" class="btn">Profil</a>
+      <a href="/logout" class="btn">Déconnexion</a>
     </div>
 
     <!-- Hamburger Icon -->
@@ -34,13 +33,19 @@
   </div>
 
   <!-- Mobile Menu -->
-  <div class="md:hidden">
-    <div id="menu"
-      class="absolute flex-col items-center hidden self-end py-8 mt-10 space-y-6 font-bold bg-white sm:w-auto sm:self-center left-6 right-6 drop-shadow-md">
-      <a href="{{ path('app_user_index') }}">Utilisateur</a>
-      <a href="{{ path('app_activity_index') }}">Activité</a>
-      {# <a href="/comment">Comment</a> #}
-      <a href="{{ path('app_region_index') }}">Région</a>
+    <div class="md:hidden">
+      <div id="menu"
+        class="absolute flex-col items-center hidden self-end py-8 mt-10 space-y-6 font-bold bg-white sm:w-auto sm:self-center left-6 right-6 drop-shadow-md">
+        {% if is_granted('ROLE_ADMIN') %}
+          <a href="{{ path('app_user_index') }}">Utilisateur</a>
+          <a href="{{ path('app_activity_index') }}">Activité</a>
+          {# <a href="/comment">Comment</a> #}
+          <a href="{{ path('app_region_index') }}">Région</a>
+        {% endif %}
+        <!-- Button -->
+          <a href="/profil" class="text-red-800	">Profil</a>
+          <a href="/logout" class="text-red-800	">Déconnexion</a>
+      </div>
     </div>
-  </div>
+    
 </nav>

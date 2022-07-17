@@ -11,10 +11,10 @@
         </form>
     </div>
 
-    <div class="flex flex-wrap justify-items-stretch">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
     {% for activity in activities %}
-        <div class="basis-1 md:basis-1/4 m-5">
-            <a href="{{ path('app_main_activity_show', {'id': activity.id}) }}">
+        <div class="m-3">
+            <a href="{{ path('app_main_activity_show', {'id': activity.id}) }}" class="">
                 <div class="block p-6 rounded-lg shadow-lg border-2 bg-white min-h-full">
                     <h5 class="text-gray-900 text-xl leading-tight font-medium mb-2">{{ activity.name }}</h5>
                     <p>{{ activity.region.name }} - {{ activity.localisation }}</p>
