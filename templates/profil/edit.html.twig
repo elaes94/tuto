@@ -6,7 +6,7 @@
     <h1 class="mb-2">Modification d'un utilisateur</h1>
     {{ include('profil/_form.html.twig')}}
 
-    <a href="{{ app.request.headers.get('referer') }}">Retour</a>
+    <a href="{{ path('app_home') }}">Retour</a>
 
     {# {{ include('user/_delete_form.html.twig') }} #}
 {% endblock %}

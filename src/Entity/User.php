@@ -40,10 +40,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string', length: 255)]
     private $lastname;
 
-    #[ORM\Column(type: 'integer')]
+    #[ORM\Column(type: 'string')]
     private $phone_1;
 
-    #[ORM\Column(type: 'integer', nullable: true)]
+    #[ORM\Column(type: 'string', nullable: true)]
     private $phone_2;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
@@ -187,24 +187,24 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getPhone1(): ?int
+    public function getPhone1(): ?string
     {
         return $this->phone_1;
     }
 
-    public function setPhone1(int $phone_1): self
+    public function setPhone1(string $phone_1): self
     {
         $this->phone_1 = $phone_1;
 
         return $this;
     }
 
-    public function getPhone2(): ?int
+    public function getPhone2(): ?string
     {
         return $this->phone_2;
     }
 
-    public function setPhone2(?int $phone_2): self
+    public function setPhone2(?string $phone_2): self
     {
         $this->phone_2 = $phone_2;
 
