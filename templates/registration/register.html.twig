@@ -3,6 +3,8 @@
 {% block title %}Enregistrement{% endblock %}
 
 {% block body %}
+
+<section class="m-auto md:w-80 md:shadow-lg md:p-6">
     <h1 class="mb-3 text-xl">Veuillez vous enregistrer</h1>
 
     {% for flash_error in app.flashes('verify_email_error') %}
@@ -11,111 +13,119 @@
 
     {{ form_start(registrationForm) }}
         <!--     E-mail     -->
-        <div class="mb-3">
+        <div class="mb-6">
             {% set class = '' %}
             {% if not registrationForm.email.vars.valid %}
                 {% set class = 'bg-red-200' %}
             {% endif %}
+
+            <label for="{{ registrationForm.email.vars.id }}" class="form-label">E-mail:</label>
             <input  type="text" 
                     id="{{ registrationForm.email.vars.id }}" 
                     name="{{ registrationForm.email.vars.full_name }}" 
                     value="{{ registrationForm.email.vars.value }}" 
                     placeholder="Entrez votre email"     
-                    class="{{ class }}"
+                    class="{{ class }} form-input"
             />
             {{ form_errors(registrationForm.email) }}
             {% do registrationForm.email.setRendered %}
         </div>
 
         <!--     Password input     -->
-        <div class="mb-3">
+        <div class="mb-6">
             {% set class = '' %}
             {% if not registrationForm.plainPassword.vars.valid %}
                 {% set class = 'bg-red-200' %}
             {% endif %}
-            <input  type="text" 
+            <label for="{{ registrationForm.plainPassword.vars.id }}" class="form-label">Mot de passe :</label>
+            <input  type="password" 
                     id="{{ registrationForm.plainPassword.vars.id }}" 
                     name="{{ registrationForm.plainPassword.vars.full_name }}" 
                     value="{{ registrationForm.plainPassword.vars.value }}" 
                     placeholder="Entrez votre mot de passe"     
-                    class="{{ class }}"
+                    class="{{ class }} form-input"
             />
             {{ form_errors(registrationForm.plainPassword) }}
             {% do registrationForm.plainPassword.setRendered %}
         </div>
         <!--     Firstname    -->
-        <div class="mb-3">
+        <div class="mb-6">
             {% set class = '' %}
             {% if not registrationForm.firstname.vars.valid %}
                 {% set class = 'bg-red-200' %}
             {% endif %}
+            <label for="{{ registrationForm.firstname.vars.id }}" class="form-label">Prénom :</label>
             <input  type="text" 
                     id="{{ registrationForm.firstname.vars.id }}" 
                     name="{{ registrationForm.firstname.vars.full_name }}" 
                     value="{{ registrationForm.firstname.vars.value }}" 
                     placeholder="Entrez votre prénom"     
-                    class="{{ class }}"
+                    class="{{ class }} form-input"
             />
             {{ form_errors(registrationForm.firstname) }}
             {% do registrationForm.firstname.setRendered %}
         </div>
 
         <!--     Lastname    -->
-        <div class="mb-3">
+        <div class="mb-6">
             {% set class = '' %}
             {% if not registrationForm.lastname.vars.valid %}
                 {% set class = 'bg-red-200' %}
             {% endif %}
+            <label for="{{ registrationForm.lastname.vars.id }}" class="form-label">Nom :</label>
             <input  type="text" 
                     id="{{ registrationForm.lastname.vars.id }}" 
                     name="{{ registrationForm.lastname.vars.full_name }}" 
                     value="{{ registrationForm.lastname.vars.value }}" 
                     placeholder="Entrez votre nom"     
-                    class="{{ class }}"
+                    class="{{ class }} form-input"
             />
             {{ form_errors(registrationForm.lastname) }}
             {% do registrationForm.lastname.setRendered %}
         </div>
 
         <!--     Phone_1    -->
-        <div class="mb-3">
+        <div class="mb-6">
             {% set class = '' %}
             {% if not registrationForm.phone_1.vars.valid %}
                 {% set class = 'bg-red-200' %}
             {% endif %}
+            <label for="{{ registrationForm.phone_1.vars.id }}" class="form-label">Téléphone n°1 :</label>
             <input  type="text" 
                     id="{{ registrationForm.phone_1.vars.id }}" 
                     name="{{ registrationForm.phone_1.vars.full_name }}" 
                     value="{{ registrationForm.phone_1.vars.value }}" 
                     placeholder="Numéro de téléphone 1"     
-                    class="{{ class }}"
+                    class="{{ class }} form-input"
             />
             {{ form_errors(registrationForm.phone_1) }}
             {% do registrationForm.phone_1.setRendered %}
         </div>
 
-        <!--     Phone_1    -->
-        <div class="mb-3">
+        <!--     Phone_2    -->
+        <div class="mb-6">
             {% set class = '' %}
             {% if not registrationForm.phone_2.vars.valid %}
                 {% set class = 'bg-red-200' %}
             {% endif %}
+            <label for="{{ registrationForm.phone_2.vars.id }}" class="form-label">Téléphone n°2 :</label>
             <input  type="text" 
                     id="{{ registrationForm.phone_2.vars.id }}" 
                     name="{{ registrationForm.phone_2.vars.full_name }}" 
                     value="{{ registrationForm.phone_2.vars.value }}" 
                     placeholder="Numéro de téléphone 2"     
-                    class="{{ class }}"
+                    class="{{ class }} form-input"
             />
             {{ form_errors(registrationForm.phone_2) }}
             {% do registrationForm.phone_2.setRendered %}
         </div>
 
-        {{ form_row(registrationForm.agreeTerms) }}
+        {# {{ form_row(registrationForm.agreeTerms) }} #}
         <button type="submit" class="btn">S'enregistrer</button>
     {{ form_end(registrationForm) }}
 
     <div class="mb-6">
         <a href="/login" class="underline">Se connecter</a>
     </div>
+</section>
 {% endblock %}
