@@ -16,7 +16,7 @@
     {% endfor %}
 
     {% if error %}
-        <div class="text-lg mb-6 text-red-600">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        <div class="text-lg mb-6 text-red-600">{{ error.messageKey|trans(error.messageData, 'security', 'fr_FR') }}</div>
     {% endif %}
 
     {# {% if verify %}
