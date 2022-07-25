@@ -26,7 +26,7 @@ security:
                 # "login" is the name of the route created previously
                 login_path: login
                 check_path: login
-                default_target_path: app_main_test
+                default_target_path: app_home
 
             # login_throttling:
             #     max_attempts: 3
