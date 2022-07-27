@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Activity;
+use App\Form\ActivityType;
 use App\Repository\ActivityRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -40,8 +41,24 @@ class MainController extends AbstractController
     /**
      * @Route("/test")
      */
-    public function test(): Response
+    public function test(Request $request, ActivityRepository $activityRepository): Response
     {
+        $activity = new Activity();
+
+        // $activity->setContact($this->getUser());
+        $form = $this->createForm(ActivityType::class, $activity);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $activityRepository->add($activity, true);
+
+            return $this->redirectToRoute('app_activity_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('test.html.twig', [
+            'activity' => $activity,
+            'form' => $form,
+        ]);
         return $this->render('test.html.twig');
     }
 }

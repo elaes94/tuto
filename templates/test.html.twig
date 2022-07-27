@@ -23,4 +23,8 @@
     <div class="px-5 basis-full md:basis-1/3 bg-blue-300 rounded-full border-solid border-black border-2">03</div>
   </div>
 </section>
+{% form_theme form 'form/malink_theme.html.twig' %}
+<section class="m-auto md:w-96">
+{{ form(form) }}
+</section>
 {% endblock %}
