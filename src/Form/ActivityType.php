@@ -28,7 +28,7 @@ class ActivityType extends AbstractType
                 'class' => Region::class,
                 'choice_label' => 'name',
             ])
-            ->add('sauvegarder', SubmitType::class)
+            // ->add('sauvegarder', SubmitType::class)
         ;
     }
 

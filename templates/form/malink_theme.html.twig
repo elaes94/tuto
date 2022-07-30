@@ -10,17 +10,17 @@
     {{- parent() -}}
 {%- endblock -%}
 
-{# {%- block choice_widget_collapsed -%}
-    {%- set attr = attr|merge({class: (attr.class|default('') ~ ' border-red-500')|trim}) -%}
+{%- block choice_widget_collapsed -%}
+    {%- set attr = attr|merge({class: (attr.class|default('') ~ ' form-input')|trim}) -%}
     {{- parent() -}}
-{%- endblock choice_widget_collapsed -%} #}
+{%- endblock choice_widget_collapsed -%}
 
 {%- block submit_widget -%}
     {%- set attr = attr|merge({class: (attr.class|default('btn'))|trim}) -%}
     {{- parent() -}}
 {%- endblock submit_widget %}
 
-{%- block checkbox_widget -%}
+{# {%- block checkbox_widget -%}
     {%- set widget_class = widget_class|default('mr-2 rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-offset-0 focus:ring-indigo-200 focus:ring-opacity-50') -%}
     {{- parent() -}}
 {%- endblock -%}
@@ -28,4 +28,4 @@
 {%- block checkbox_label -%}
     {%- set label_class = label_class|default('block text-gray-800') -%}
     {{- block('form_label') -}}
-{%- endblock -%}
+{%- endblock -%} #}

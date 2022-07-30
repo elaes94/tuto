@@ -49,6 +49,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $social;
 
+    #[ORM\Column(type: 'string', length: 255)]
+    private $categorie;
+
     public function __construct()
     {
         $this->activities = new ArrayCollection();
@@ -219,6 +222,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setSocial(?string $social): self
     {
         $this->social = $social;
+
+        return $this;
+    }
+
+    public function getCategorie(): ?string
+    {
+        return $this->categorie;
+    }
+
+    public function setCategorie(string $categorie): self
+    {
+        $this->categorie = $categorie;
 
         return $this;
     }

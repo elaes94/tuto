@@ -4,9 +4,12 @@
 
 {% block body %}
     <h1 class="mb-2">Modification d'un utilisateur</h1>
-    {{ include('user/_form.html.twig')}}
+    {# {{ include('user/_form.html.twig')}} #}
+    <section class="m-auto md:w-96">
+        {{ form(form) }}
+    </section>
 
-    <a href="{{ path('app_user_index') }}">retour</a>
+    <a href="{{ path('app_user_index') }}" class="btn">retour</a>
 
     {# {{ include('user/_delete_form.html.twig') }} #}
 {% endblock %}

@@ -38,6 +38,14 @@ class MainController extends AbstractController
         ]);
     }
 
+    #[Route('/contact/{id}', name: 'app_main_activity_contact', methods: ['GET'])]
+    public function contact(Activity $activity): Response
+    {
+        return $this->render('main/activity/contact.html.twig', [
+            'activity' => $activity,
+        ]);
+    }
+
     /**
      * @Route("/test")
      */
