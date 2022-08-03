@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
@@ -34,22 +35,49 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Activity::class, mappedBy: 'contact')]
     private $activities;
 
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: 'string', length: 25)]
+    #[Assert\Length(
+        min: 3, max: 25,
+        minMessage: 'Votre prénom doit avoir au moins {{ limit }} caractères.',
+        maxMessage: 'Votre prénom ne doit pas avoir plus de {{ limit }} caractères.',
+    )]
+    #[Assert\Regex(
+        pattern: '/(^[a-zA-ZÀ-Ÿ\-. ]*$)/',
+        message: 'Votre prénom contient des caractères non valide.',
+    )]
     private $firstname;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\Length(
+        min: 3, max: 25,
+        minMessage: 'Votre nom doit avoir au moins {{ limit }} caractères.',
+        maxMessage: 'Votre nom ne doit pas avoir plus de {{ limit }} caractères.',
+    )]
+    #[Assert\Regex(
+        pattern: '/(^[a-zA-ZÀ-Ÿ\-. ]*$)/',
+        message: 'Votre nom contient des caractères non valide.',
+    )]
     private $lastname;
 
     #[ORM\Column(type: 'string')]
+    #[Assert\Regex(
+        pattern: '/(^[24-9]{1}[0-9]{1}(?:[\s.-]*\d{2}){3}$)/',
+        message: 'Votre numéro n\'est pas valide',
+    )]
     private $phone_1;
 
     #[ORM\Column(type: 'string', nullable: true)]
+    #[Assert\Regex(
+        pattern: '/(^[24-9]{1}[0-9]{1}(?:[\s.-]*\d{2}){3}$)/',
+        message: 'Votre numéro n\'est pas valide',
+    )]
     private $phone_2;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $social;
 
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: 'string', length: 25)]
+    #[Assert\Choice(['membre', 'professionnel'], message: 'La catégorie n\'est pas valide.')]
     private $categorie;
 
     public function __construct()
@@ -192,11 +220,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getPhone1(): ?string
     {
+        $this->phone_1 = chunk_split($this->phone_1, 2, ' ');
         return $this->phone_1;
     }
 
     public function setPhone1(string $phone_1): self
     {
+        $phone_1 = preg_replace('/[\s.-]/', '', $phone_1);
+        
         $this->phone_1 = $phone_1;
 
         return $this;
@@ -204,11 +235,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getPhone2(): ?string
     {
+        $this->phone_2 = chunk_split($this->phone_2, 2, ' ');
         return $this->phone_2;
     }
 
     public function setPhone2(?string $phone_2): self
     {
+        $phone_2 = preg_replace('/[\s.-]/', '', $phone_2);
         $this->phone_2 = $phone_2;
 
         return $this;

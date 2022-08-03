@@ -16,18 +16,21 @@ class UserType extends AbstractType
         $builder
             // ->add('email')
             // ->add('roles')
-            ->add('firstname')
-            ->add('lastname')
-            ->add('phone_1')
-            ->add('phone_2')
+            ->add('firstname', null, ['label' => 'Prénom'])
+            ->add('lastname', null, ['label' => 'Nom'])
+            ->add('phone_1', null, ['label' => 'Numéro de téléphone n°1'])
+            ->add('phone_2', null, ['label' => 'Numéro de téléphone n°2'])
             ->add('categorie', ChoiceType::class, [
+                'label' => 'Catégorie',
                 'choices'  => [
                     'membre' => "membre",
                     'professionnel' => "professionnel", 
                 ],
             ])
             // ->add('isVerified')
-            ->add('sauvegarder', SubmitType::class)
+            ->add('sauvegarder', SubmitType::class, [                
+                'validate' => false
+            ])
         ;
     }
 
