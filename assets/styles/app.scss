@@ -81,3 +81,8 @@
     transform: rotate(-45deg) translateY(6px) translate(-6px);
   }
 //   End humburger
+
+label.required:after {
+  content: " *";
+  color: red;
+}

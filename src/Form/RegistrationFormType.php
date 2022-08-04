@@ -6,6 +6,7 @@ use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\IsTrue;
@@ -17,11 +18,11 @@ class RegistrationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('firstname')
-            ->add('lastname')
-            ->add('email')
-            ->add('phone_1')
-            ->add('phone_2')
+            ->add('firstname', null, ['label' => 'Prénom', 'empty_data' => ''])
+            ->add('lastname', null, ['label' => 'Nom', 'empty_data' => ''])
+            ->add('email', null, ['label' => 'E-mail', 'empty_data' => ''])
+            ->add('phone_1', null, ['label' => 'Numéro de téléphone n°1', 'empty_data' => ''])
+            ->add('phone_2', null, ['label' => 'Numéro de téléphone n°1', 'empty_data' => ''])
             // ->add('agreeTerms', CheckboxType::class, [
             //     'mapped' => false,
             //     'constraints' => [
@@ -31,6 +32,7 @@ class RegistrationFormType extends AbstractType
             //     ],
             // ])
             ->add('plainPassword', PasswordType::class, [
+                'label' => 'Mot de passe',
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
                 'mapped' => false,
@@ -46,6 +48,9 @@ class RegistrationFormType extends AbstractType
                         'max' => 4096,
                     ]),
                 ],
+            ])
+            ->add('valider', SubmitType::class, [                
+                'validate' => false
             ])
         ;
     }

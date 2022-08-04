@@ -11,7 +11,11 @@
         <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
     {% endfor %}
 
-    {{ form_start(registrationForm) }}
+     <section class="m-auto md:w-96">
+        {{ form(registrationForm) }}
+    </section>
+
+    {# {{ form_start(registrationForm) }}
         <!--     E-mail     -->
         <div class="mb-6">
             {% set class = '' %}
@@ -120,9 +124,9 @@
             {% do registrationForm.phone_2.setRendered %}
         </div>
 
-        {# {{ form_row(registrationForm.agreeTerms) }} #}
+        {{ form_row(registrationForm.agreeTerms) }}
         <button type="submit" class="btn mb-6">S'enregistrer</button>
-    {{ form_end(registrationForm) }}
+    {{ form_end(registrationForm) }} #}
 
     <div class="mb-6">
         <span>Vous avez déjà un compte compte ? </span><a href="/login" class="underline">Connexion</a>

@@ -21,6 +21,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $id;
 
     #[ORM\Column(type: 'string', length: 180, unique: true)]
+    #[Assert\NotBlank(message:'Champ obligatoire')]
     private $email;
 
     #[ORM\Column(type: 'json')]
@@ -36,6 +37,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $activities;
 
     #[ORM\Column(type: 'string', length: 25)]
+    #[Assert\NotBlank(message:'Champ obligatoire')]
+    // #[Assert\NotNull(message:'enter things')]
     #[Assert\Length(
         min: 3, max: 25,
         minMessage: 'Votre prénom doit avoir au moins {{ limit }} caractères.',
@@ -48,6 +51,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $firstname;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\NotBlank(message:'Champ obligatoire')]
     #[Assert\Length(
         min: 3, max: 25,
         minMessage: 'Votre nom doit avoir au moins {{ limit }} caractères.',
@@ -60,6 +64,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $lastname;
 
     #[ORM\Column(type: 'string')]
+    #[Assert\NotBlank(message:'Champ obligatoire')]
     #[Assert\Regex(
         pattern: '/(^[24-9]{1}[0-9]{1}(?:[\s.-]*\d{2}){3}$)/',
         message: 'Votre numéro n\'est pas valide',

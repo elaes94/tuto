@@ -16,10 +16,10 @@ class UserType extends AbstractType
         $builder
             // ->add('email')
             // ->add('roles')
-            ->add('firstname', null, ['label' => 'Prénom'])
-            ->add('lastname', null, ['label' => 'Nom'])
-            ->add('phone_1', null, ['label' => 'Numéro de téléphone n°1'])
-            ->add('phone_2', null, ['label' => 'Numéro de téléphone n°2'])
+            ->add('firstname', null, ['label' => 'Prénom', 'empty_data' => ''])
+            ->add('lastname', null, ['label' => 'Nom', 'empty_data' => ''])
+            ->add('phone_1', null, ['label' => 'Numéro de téléphone n°1', 'empty_data' => ''])
+            ->add('phone_2', null, ['label' => 'Numéro de téléphone n°2', 'empty_data' => ''])
             ->add('categorie', ChoiceType::class, [
                 'label' => 'Catégorie',
                 'choices'  => [
