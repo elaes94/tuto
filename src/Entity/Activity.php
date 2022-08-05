@@ -6,6 +6,7 @@ use App\Repository\ActivityRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ActivityRepository::class)]
 class Activity
@@ -16,9 +17,29 @@ class Activity
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\NotBlank(message:'Champ obligatoire')]
+    #[Assert\Length(
+        min: 3, max: 25,
+        minMessage: 'Le nom doit avoir au moins {{ limit }} caractères.',
+        maxMessage: 'Le nom ne doit pas avoir plus de {{ limit }} caractères.',
+    )]
+    #[Assert\Regex(
+        pattern: '/(^[a-zA-ZÀ-Ÿ\-. ]*$)/',
+        message: 'Le nom contient des caractères non valide.',
+    )]
     private $name;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\NotBlank(message:'Champ obligatoire')]
+    #[Assert\Length(
+        min: 3, max: 30,
+        minMessage: 'La description doit avoir au moins {{ limit }} caractères.',
+        maxMessage: 'La description ne doit pas avoir plus de {{ limit }} caractères.',
+    )]
+    #[Assert\Regex(
+        pattern: '/(^[a-zA-ZÀ-Ÿ\-. ]*$)/',
+        message: 'La description contient des caractères non valide.',
+    )]
     private $description;
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'activities')]
@@ -27,7 +48,8 @@ class Activity
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $website;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\NotBlank(message:'Champ obligatoire')]
     private $localisation;
 
     #[ORM\OneToMany(mappedBy: 'activity', targetEntity: Comment::class)]

@@ -16,19 +16,17 @@ class ActivityType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name')
-            ->add('description')
-            ->add('website')
-            ->add('localisation')
-            // ->add('contact', EntityType::class, [
-            //     'class' => User::class,
-            //     'choice_label' => 'email',
-            // ])
+            ->add('name', null, ['label' => 'Nom de l\'activité', 'empty_data' => ''])
+            ->add('description', null, ['label' => 'Description', 'empty_data' => ''])
+            ->add('website', null, ['label' => 'Lien du site ou réseaux sociaux', 'empty_data' => ''])
+            ->add('localisation', null, ['label' => 'Emplacement', 'empty_data' => ''])
             ->add('region', EntityType::class, [
                 'class' => Region::class,
                 'choice_label' => 'name',
             ])
-            ->add('sauvegarder', SubmitType::class)
+            ->add('sauvegarder', SubmitType::class, [                
+                'validate' => false
+            ])
         ;
     }
 
