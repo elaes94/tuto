@@ -224,7 +224,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getPhone1(): ?string
     {
-        $this->phone_1 = chunk_split($this->phone_1, 2, ' ');
+        $this->phone_1 = trim(chunk_split($this->phone_1, 2, ' '));
         return $this->phone_1;
     }
 
@@ -239,7 +239,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getPhone2(): ?string
     {
-        $this->phone_2 = chunk_split($this->phone_2, 2, ' ');
+        $this->phone_2 = trim(chunk_split($this->phone_2, 2, ' '));
         return $this->phone_2;
     }
 

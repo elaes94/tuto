@@ -9,7 +9,7 @@ use App\Entity\User;
 use App\Form\ActivityType;
 use App\Form\PrestationType;
 use App\Form\ProductType;
-use App\Form\UserType;
+use App\Form\ProfilType;
 use App\Repository\ActivityRepository;
 use App\Repository\PrestationRepository;
 use App\Repository\ProductRepository;
@@ -27,7 +27,7 @@ class ProfilController extends AbstractController
     {
         /** @var User $user */
         $user = $this->getUser();
-        $form = $this->createForm(UserType::class, $user);
+        $form = $this->createForm(ProfilType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
