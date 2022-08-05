@@ -20,15 +20,15 @@ class ActivityType extends AbstractType
             ->add('description')
             ->add('website')
             ->add('localisation')
-            ->add('contact', EntityType::class, [
-                'class' => User::class,
-                'choice_label' => 'email',
-            ])
+            // ->add('contact', EntityType::class, [
+            //     'class' => User::class,
+            //     'choice_label' => 'email',
+            // ])
             ->add('region', EntityType::class, [
                 'class' => Region::class,
                 'choice_label' => 'name',
             ])
-            // ->add('sauvegarder', SubmitType::class)
+            ->add('sauvegarder', SubmitType::class)
         ;
     }
 

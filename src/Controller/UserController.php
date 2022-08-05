@@ -66,6 +66,16 @@ class UserController extends AbstractController
         ]);
     }
 
+    #[Route('/{id}/activity', name: 'app_user_activity', methods: ['GET'])]
+    public function activityIndex(Request $request, User $user, UserRepository $userRepository): Response
+    {
+        $activities = $user->getActivities();
+        return $this->render('user/activity.html.twig', [
+            'user' => $user,
+            'activities' => $activities,
+        ]);
+    }
+
     #[Route('/{id}', name: 'app_user_delete', methods: ['POST'])]
     public function delete(Request $request, User $user, UserRepository $userRepository): Response
     {

@@ -3,8 +3,8 @@
 {% block title %}Activités{% endblock %}
 
 {% block body %}
-    <h1 class="mb-3">Liste des activités</h1>
-    {# <a href="{{ path('app_activity_new') }}" class="btn">Créer</a> #}
+    <h1 class="mb-3">Liste des activités de {{user.firstname}} {{user.lastname}} </h1>
+    <a href="{{ path('app_activity_new', {'id' : user.id}) }}" class="btn">Créer</a>
 
     <div class="flex flex-wrap justify-items-stretch">
     {% for activity in activities %}
@@ -13,7 +13,6 @@
                 <div class="block p-6 rounded-lg shadow-lg border-2 bg-white min-h-full">
                     <h5 class="text-gray-900 text-xl leading-tight font-medium mb-2">{{ activity.name }}</h5>
                     <p>{{ activity.region.name }} - {{ activity.localisation }}</p>
-                    <p>{{ activity.contact.email }}</p>
                     <p class="text-gray-700 text-base mb-4">
                     {{ activity.description }}
                     </p>

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Activity;
+use App\Entity\User;
 use App\Form\ActivityType;
 use App\Repository\ActivityRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -21,19 +22,19 @@ class ActivityController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_activity_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, ActivityRepository $activityRepository): Response
+    #[Route('/new/{id}', name: 'app_activity_new', methods: ['GET', 'POST'])]
+    public function new(Request $request, User $user, ActivityRepository $activityRepository): Response
     {
         $activity = new Activity();
 
-        // $activity->setContact($this->getUser());
+        $activity->setContact($user);
         $form = $this->createForm(ActivityType::class, $activity);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $activityRepository->add($activity, true);
 
-            return $this->redirectToRoute('app_activity_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_user_activity', ['id' => $user->getId()]);
         }
 
         return $this->renderForm('activity/new.html.twig', [
@@ -59,7 +60,7 @@ class ActivityController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $activityRepository->add($activity, true);
 
-            return $this->redirectToRoute('app_activity_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_user_activity', ['id' => $activity->getContact()->getId()]);
         }
 
         return $this->renderForm('activity/edit.html.twig', [

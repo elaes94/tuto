@@ -5,12 +5,11 @@
 {% block body %}
     <h1 class="mb-2">Création d'une activité</h1>
 
-    {{ include('activity/_form.html.twig') }}
+    {# {{ include('activity/_form.html.twig') }} #}
 
-    {# {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
-    {{ form_end(form) }} #}
+    <section class="m-auto md:w-96">
+        {{ form(form) }}
+    </section>
 
-    <a href="{{ path('app_activity_index') }}">retour</a>
+    {# <a href="{{ path('app_activity_index') }}" class="btn">retour</a> #}
 {% endblock %}

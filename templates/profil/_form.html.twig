@@ -39,7 +39,7 @@
     </div>
 
     <!--     User E-mail     -->
-    <div class="mb-3">
+    {# <div class="mb-3">
         {% set class = '' %}
         {% if not form.email.vars.valid %}
             {% set class = 'bg-red-200' %}
@@ -53,7 +53,7 @@
         />
         {{ form_errors(form.email) }}
         {% do form.email.setRendered %}
-    </div>
+    </div> #}
 
     <!--     User phone 1     -->
     <div class="mb-3">
