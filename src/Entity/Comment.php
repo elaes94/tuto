@@ -23,6 +23,13 @@ class Comment
     #[ORM\JoinColumn(nullable: false)]
     private $activity;
 
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'comments')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $author;
+
+    #[ORM\Column(type: 'string', length: 25)]
+    private $status;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -60,6 +67,30 @@ class Comment
     public function setActivity(?Activity $activity): self
     {
         $this->activity = $activity;
+
+        return $this;
+    }
+
+    public function getAuthor(): ?User
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(?User $author): self
+    {
+        $this->author = $author;
+
+        return $this;
+    }
+
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(string $status): self
+    {
+        $this->status = $status;
 
         return $this;
     }

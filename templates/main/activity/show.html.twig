@@ -14,7 +14,7 @@
         <h1 class="text-xl">Service</h1>
         <ul class="list-disc m-3">
             {% for prestation in activity.prestations %}
-                    <li><a href="{{ path('app_prestation_edit', {'id': prestation.id}) }}" class="hover:underline">{{ prestation.name }}</a></li>
+                    <li>{{ prestation.name }}</a></li>
             {% else %}
                     <li colspan="3">Aucun service</li>
             {% endfor %}
@@ -26,13 +26,13 @@
         <h1 class="text-xl">Produit</h1>
         <ul class="list-disc m-3">
             {% for product in activity.products %}
-                    <li><a href="{{ path('app_product_edit', {'id': product.id}) }}" class="hover:underline">{{ product.name }}</a></li>
+                    <li>{{ product.name }}</a></li>
             {% else %}
                     <li colspan="3">Aucun produit</li>
             {% endfor %}
         </ul>
     </div>
     {% endif %}
-    <a href="{{ app.request.headers.get('referer') }}" class="btn">Retour</a>
+    {# <a href="{{ app.request.headers.get('referer') }}" class="btn">Retour</a> #}
     <a href="{{ path('app_main_activity_contact', {'id': activity.id}) }}" class="btn">Contact</a>
 {% endblock %}
